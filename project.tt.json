@@ -1,0 +1,13 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "my-store",
+  "description": "私域电商小程序",
+  "appid": "touristappid",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "miniprogram"
+}
