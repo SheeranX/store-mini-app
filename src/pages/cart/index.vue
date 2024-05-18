@@ -1,5 +1,5 @@
 <template>
-  <view class="home-page">
+  <view class="index">
     <view>
       <img src="" alt="">
     </view>

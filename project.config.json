@@ -2,13 +2,13 @@
   "miniprogramRoot": "./dist",
   "projectname": "my-store",
   "description": "私域电商小程序",
-  "appid": "touristappid",
+  "appid": "wx30787e3830f20709",
   "setting": {
     "urlCheck": true,
-    "es6": false,
+    "es6": true,
     "enhance": false,
-    "compileHotReLoad": false,
-    "postcss": false,
+    "compileHotReLoad": true,
+    "postcss": true,
     "minified": false
   },
   "compileType": "miniprogram"
