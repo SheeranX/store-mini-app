@@ -5,11 +5,12 @@
   "appid": "wx30787e3830f20709",
   "setting": {
     "urlCheck": true,
-    "es6": true,
+    "es6": false,
     "enhance": false,
-    "compileHotReLoad": true,
-    "postcss": true,
-    "minified": false
+    "compileHotReLoad": false,
+    "postcss": false,
+    "minified": false,
+    "libVersion": "3.4.2"
   },
   "compileType": "miniprogram"
 }

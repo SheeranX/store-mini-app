@@ -1,4 +1,5 @@
 import Components from 'unplugin-vue-components/webpack';
+const path = require('path');
 const NutUIResolver = () => {
   return (name) => {
     if (name.startsWith('Nut')) {
@@ -27,6 +28,9 @@ const config = {
     828: 1.81 / 2,
     375: 2 / 1
   },
+  alias: {
+    '@': path.resolve(__dirname, '..', 'src')
+  },
   sourceRoot: 'src',
   outputRoot: 'dist',
   plugins: ['@tarojs/plugin-html'],
@@ -54,6 +58,9 @@ const config = {
       chain.plugin('unplugin-vue-components').use(Components({
         resolvers: [NutUIResolver()]
       }))
+    },
+    miniCssExtractPluginOption: {
+      ignoreOrder: true
     },
     postcss: {
       pxtransform: {

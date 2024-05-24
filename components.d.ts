@@ -7,9 +7,29 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Card: typeof import('./src/components/common/recommand/card.vue')['default']
+    Container: typeof import('./src/components/common/recommand/container.vue')['default']
+    Navbar: typeof import('./src/components/common/navbar.vue')['default']
+    NutAvatar: typeof import('@nutui/nutui-taro')['Avatar']
     NutButton: typeof import('@nutui/nutui-taro')['Button']
     NutCategory: typeof import('@nutui/nutui-taro')['Category']
     NutCategoryPane: typeof import('@nutui/nutui-taro')['CategoryPane']
+    NutCheckbox: typeof import('@nutui/nutui-taro')['Checkbox']
+    NutEllipsis: typeof import('@nutui/nutui-taro')['Ellipsis']
+    NutEmpty: typeof import('@nutui/nutui-taro')['Empty']
+    NutGrid: typeof import('@nutui/nutui-taro')['Grid']
+    NutGridItem: typeof import('@nutui/nutui-taro')['GridItem']
+    NutInputNumber: typeof import('@nutui/nutui-taro')['InputNumber']
+    NutPrice: typeof import('@nutui/nutui-taro')['Price']
+    NutSearchbar: typeof import('@nutui/nutui-taro')['Searchbar']
+    NutSku: typeof import('@nutui/nutui-taro')['Sku']
+    NutSticky: typeof import('@nutui/nutui-taro')['Sticky']
+    NutSwipe: typeof import('@nutui/nutui-taro')['Swipe']
+    NutSwiper: typeof import('@nutui/nutui-taro')['Swiper']
+    NutSwiperItem: typeof import('@nutui/nutui-taro')['SwiperItem']
+    NutTag: typeof import('@nutui/nutui-taro')['Tag']
     NutToast: typeof import('@nutui/nutui-taro')['Toast']
+    RecommandCol: typeof import('./src/components/common/recommand/recommand-col.vue')['default']
+    RecommandRow: typeof import('./src/components/common/recommand/recommand-row.vue')['default']
   }
 }

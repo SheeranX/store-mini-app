@@ -1,9 +1,7 @@
 <template>
   <view class="catalog-page">
     <nut-category :category="data.category" @change="change">
-      <nut-category-pane :categoryChild="data.categoryChild" @onChange="onChange">
-        11
-      </nut-category-pane>
+      <nut-category-pane :categoryChild="data.categoryChild" @onChange="onChange"></nut-category-pane>
     </nut-category>
   </view>
 </template>

@@ -1,38 +1,65 @@
 <template>
   <view class="home-page">
-    <view>
-      <img src="" alt="">
+    <div class="banner"></div>
+    <Navbar name="婴幼儿品牌馆"></Navbar>
+    <view class="home-page-content">
+      <nut-sticky top="0">
+        <nut-searchbar v-model="search" @click-input="handleClick" :disabled="true" background="none">
+          <template #rightin>
+            <Search></Search>
+          </template>
+        </nut-searchbar>
+      </nut-sticky>
+      <div class="home-page-content-swipe">
+        <CustomSwipe :list="list"></CustomSwipe>
+      </div>
+      <div class="home-page-content-grid">
+        <GridCell :list="gridList"></GridCell>
+      </div>
+      <Recommand theme-title="热门推荐"></Recommand>
+      <Recommand theme-title="新品上架"></Recommand>
+      <Recommand theme-title="特价专区"></Recommand>
     </view>
-    {{ msg }} <Dongdong />
-    <view class="btn">
-      <nut-button type="primary" @click="handleClick('text', msg2, true)">点我</nut-button>
-    </view>
-    <nut-toast :msg="msg2" v-model:visible="show" :type="type" :cover="cover"/>
   </view>
 </template>
 
 <script>
 import { reactive, toRefs } from 'vue';
-import { Dongdong } from '@nutui/icons-vue-taro';
+import Navbar from '@/components/common/navbar.vue'
+import { Search } from '@nutui/icons-vue-taro'
+import CustomSwipe from './widgets/custom-swipe.vue'
+import GridCell from './widgets/gird-cell.vue'
+import Recommand from '@/components/common/recommand/container.vue'
+
 export default {
-  name: 'Index',
+  name: 'Home',
   components: {
-    Dongdong
+    Navbar,
+    Search,
+    CustomSwipe,
+    GridCell,
+    Recommand
   },
   setup() {
     const state = reactive({
-      msg: '欢迎使用 NutUI4.0 开发小程序',
-      msg2: '你成功了～',
-      type: 'text',
-      show: false,
-      cover: false
+      search: '',
+      list: ['https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg',
+        'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
+        'https://storage.360buyimg.com/jdc-article/welcomenutui.jpg',
+        'https://storage.360buyimg.com/jdc-article/fristfabu.jpg'],
+      gridList: [
+          'https://m.360buyimg.com/n2/jfs/t1/183517/38/7834/227702/60be1915Ed04664b0/eaf7536ab2c5f4b0.jpg',
+          'https://m.360buyimg.com/n2/jfs/t1/206917/11/8226/66945/6184e893E5d49b030/9fa0ff3ea1c0f225.jpg',
+          'https://m.360buyimg.com/n2/jfs/t1/23018/23/4644/40085/5c330e8aEb906ed16/94f3022b373bf991.jpg',
+          'https://m.360buyimg.com/n2/jfs/t1/35828/26/5078/324781/5cbea100Eb22bb637/4d2d5e3bcd86fba4.jpg',
+          'https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg',
+          'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
+          'https://storage.360buyimg.com/jdc-article/welcomenutui.jpg',
+          'https://storage.360buyimg.com/jdc-article/fristfabu.jpg'
+      ]
     });
-
-    const handleClick = (type, msg, cover = false) => {
-      state.show = true;
-      state.msg2 = msg;
-      state.type = type;
-      state.cover = cover;
+    const handleClick = () => {
+      console.log('click')
     };
 
     return {
@@ -44,10 +71,31 @@ export default {
 </script>
 
 <style lang="scss">
-.index {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+.home-page {
+  position: relative;
+  .banner {
+    position: absolute;
+    background: linear-gradient(to bottom, #f36409, #EB4D50);
+    width: 100vw;
+    border-bottom-right-radius: 80px;
+    border-bottom-left-radius: 80px;
+    height: 25vh;
+    z-index: -1;
+  }
+  &-content-swipe {
+    padding: 0 32px;
+    border-radius: 8px;
+    overflow: hidden;
+    .nut-swiper {
+      border-radius: 8px;
+    }
+  }
+  &-content-grid {
+    margin: 20px 32px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
 }
 </style>
