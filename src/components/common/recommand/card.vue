@@ -14,3 +14,11 @@
     </div>
   </div>
 </template>
+<script setup>
+defineProps({
+  info: {
+    type: Object,
+    default: () => ({})
+  }
+})
+</script>

@@ -1,6 +1,6 @@
 <template>
   <div class="good-item-col">
-    <Card v-for="(item, index) in 10" :key="index"></Card>
+    <Card v-for="(item, index) in 10" :key="index" @click="handleClick(item)"></Card>
   </div>
 </template>
 <script setup>
@@ -11,4 +11,8 @@ defineProps({
     default: () => ({})
   }
 })
+const emits = defineEmits(['item-click'])
+const handleClick = (item) => {
+  emits('item-click', item)
+}
 </script>

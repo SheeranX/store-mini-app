@@ -1,3 +1,3 @@
-export const isEmpty = (value) => {
+export const isEmpty = (value:any) => {
     return value === null && value === undefined && value === ''
 }

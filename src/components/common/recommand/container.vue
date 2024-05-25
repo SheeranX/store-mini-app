@@ -5,8 +5,8 @@
       <div class="more" v-if="direction === 'row'">更多</div>
     </div>
     <div class="recommand-wrapper--content">
-      <RecommandRow v-if="direction === 'row'"></RecommandRow>
-      <RecommandCol v-else></RecommandCol>
+      <RecommandRow v-if="direction === 'row'" @item-click="handleClick"></RecommandRow>
+      <RecommandCol v-else @item-click="handleClick"></RecommandCol>
     </div>
   </div>
 </template>
@@ -20,6 +20,10 @@ defineProps({
     default: 'row'
   }
 })
+const emits = defineEmits(['item-click'])
+const handleClick = (item) => {
+  emits('item-click', item)
+}
 </script>
 <style lang="scss">
 @import './index.scss';

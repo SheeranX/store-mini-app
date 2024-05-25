@@ -3,22 +3,20 @@
     <div class="banner"></div>
     <Navbar name="婴幼儿品牌馆"></Navbar>
     <view class="home-page-content">
-      <nut-sticky top="0">
-        <nut-searchbar v-model="search" @click-input="handleClick" :disabled="true" background="none">
-          <template #rightin>
-            <Search></Search>
-          </template>
-        </nut-searchbar>
-      </nut-sticky>
+      <nut-searchbar v-model="search" @click-input="handleClick" :disabled="true" background="none">
+        <template #rightin>
+          <Search></Search>
+        </template>
+      </nut-searchbar>
       <div class="home-page-content-swipe">
         <CustomSwipe :list="list"></CustomSwipe>
       </div>
       <div class="home-page-content-grid">
         <GridCell :list="gridList"></GridCell>
       </div>
-      <Recommand theme-title="热门推荐"></Recommand>
-      <Recommand theme-title="新品上架"></Recommand>
-      <Recommand theme-title="特价专区"></Recommand>
+      <Recommand theme-title="热门推荐" @item-click="handleItemClick"></Recommand>
+      <Recommand theme-title="新品上架" @item-click="handleItemClick"></Recommand>
+      <Recommand theme-title="特价专区" @item-click="handleItemClick"></Recommand>
     </view>
   </view>
 </template>
@@ -30,7 +28,7 @@ import { Search } from '@nutui/icons-vue-taro'
 import CustomSwipe from './widgets/custom-swipe.vue'
 import GridCell from './widgets/gird-cell.vue'
 import Recommand from '@/components/common/recommand/container.vue'
-
+import router from '@/routes'
 export default {
   name: 'Home',
   components: {
@@ -62,9 +60,14 @@ export default {
       console.log('click')
     };
 
+    const handleItemClick = (item) => {
+      console.log(item)
+      router.navigate('product-details')
+    }
     return {
       ...toRefs(state),
-      handleClick
+      handleClick,
+      handleItemClick
     }
   }
 }

@@ -3,7 +3,7 @@
     <template v-if="list.length">
       <cart-item v-for="(item, index) in list" :key="index" class="cart-wrapper-item" @sku-click="handleSkuClick"></cart-item>
     </template>
-    <nut-empty description="购物车为空，快去添加商品吧～" v-else></nut-empty>
+    <nut-empty description="购物车空空如也，快去选购吧～" v-else></nut-empty>
     <Recommand theme-title="猜你喜欢" direction="col"></Recommand>
     <nut-sku
         v-model:visible="skuVisible"

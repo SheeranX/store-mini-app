@@ -1,6 +1,6 @@
 import Taro from "@tarojs/taro";
 
-export const setStorage = (key, value) => {
+export const setStorage = (key:string, value:any) => {
     let data = value
     if (typeof data === 'object') {
         data = JSON.stringify(data)
@@ -8,7 +8,7 @@ export const setStorage = (key, value) => {
     Taro.setStorageSync(key, data)
 }
 
-export const getStorage = (key) => {
+export const getStorage = (key:string) => {
     let value = Taro.getStorageSync(key)
     try {
         value = JSON.parse(value)
@@ -18,7 +18,7 @@ export const getStorage = (key) => {
     return value
 }
 
-export const removeStorage = (key) => {
+export const removeStorage = (key:string) => {
    try {
        Taro.removeStorageSync(key)
    } catch (e) {

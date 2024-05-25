@@ -1,8 +1,10 @@
 <template>
   <div class="navbar-wrapper" :style="style">
     <div class="navbar-title" v-if="showTitle">{{name}}</div>
-    <div class="navbar-box">
-      <Left v-if="showBack"/>
+    <div class="navbar-box" v-if="!showTitle">
+      <div class="navbar-box--back" @click="back">
+        <Left color="#fff"></Left>
+      </div>
     </div>
   </div>
 </template>
@@ -10,11 +12,12 @@
 import { computed, ref } from 'vue'
 import Taro from "@tarojs/taro";
 import { Left } from '@nutui/icons-vue-taro'
+import router from '@/routes'
 export default {
   props: {
     name: {
       type: String,
-      default: '111'
+      default: ''
     },
     showTitle: {
       type: Boolean,
@@ -25,7 +28,7 @@ export default {
   components: {
     Left
   },
-  setup () {
+  setup (props) {
     const title = ref('')
     const onClick = () => {
       console.log('click')
@@ -47,23 +50,32 @@ export default {
       const { navBarHeight, statusBarHeight } = getNavHeight()
       return {
         height: navBarHeight + 'px',
-        'padding-top': statusBarHeight + 'px'
+        'padding-top': statusBarHeight + 'px',
+        'padding-left': props.showBack ? '10px' : '18px',
+        'padding-right': props.showBack ? '10px' : '18px'
       }
     })
+    const back = () => {
+      router.back()
+    }
     return {
       style,
       title,
-      onClick
+      onClick,
+      back
     }
   }
 }
 </script>
-<style>
+<style lang="scss">
 .navbar-wrapper {
   display: flex;
   box-sizing: border-box;
   padding: 0 32px;
   align-items: center;
+  .nut-navbar {
+    box-shadow: none;
+  }
 }
 .navbar-title {
   color: #fff;
@@ -71,5 +83,15 @@ export default {
 }
 .navbar-box {
   flex: 1;
+  &--back {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 0,0, 0.3);
+  }
 }
 </style>
