@@ -1,4 +1,5 @@
 <template>
+  <Navbar name="分类" align="center"></Navbar>
   <view class="catalog-page">
     <nut-category :category="data.category" @change="change">
       <nut-category-pane :categoryChild="data.categoryChild" @onChange="onChange"></nut-category-pane>
@@ -9,6 +10,7 @@
 <script setup>
 import { reactive } from 'vue';
 import staticData from './categoryData'
+import Navbar from "@/components/common/navbar.vue";
 const data = reactive({
   categoryInfo: staticData.categoryInfo,
   category: staticData.categoryInfo.category,

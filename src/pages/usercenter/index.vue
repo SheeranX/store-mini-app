@@ -1,4 +1,5 @@
 <template>
+  <Navbar name="个人中心" align="center"></Navbar>
   <view class="index">
     <view>
       <img src="" alt="">

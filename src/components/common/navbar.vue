@@ -1,9 +1,19 @@
 <template>
   <div class="navbar-wrapper" :style="style">
-    <div class="navbar-title" v-if="showTitle">{{name}}</div>
-    <div class="navbar-box" v-if="!showTitle">
-      <div class="navbar-box--back" @click="back">
+    <div class="navbar-title" v-if="showTitle" :class="{ center: align === 'center' }">{{name}}</div>
+    <div class="navbar-box" v-else>
+      <div class="navbar-box--back" @click="back" v-if="!isSearch">
         <Left color="#fff"></Left>
+      </div>
+      <div class="navbar-search" v-else>
+        <nut-searchbar v-model="searchVal" @clear="handleClear" @search="handleSearchChange" placeholder="输入商品名搜索" autofocus>
+          <template #leftout>
+            <Left @click="back"/>
+          </template>
+          <template #leftin>
+            <Search2 color="#999"/>
+          </template>
+        </nut-searchbar>
       </div>
     </div>
   </div>
@@ -11,7 +21,7 @@
 <script>
 import { computed, ref } from 'vue'
 import Taro from "@tarojs/taro";
-import { Left } from '@nutui/icons-vue-taro'
+import { Left, Search2 } from '@nutui/icons-vue-taro'
 import router from '@/routes'
 export default {
   props: {
@@ -19,17 +29,27 @@ export default {
       type: String,
       default: ''
     },
+    align: {
+      type: String,
+      default: 'left'
+    },
     showTitle: {
       type: Boolean,
       default: true
     },
-    showBack: Boolean
+    showBack: Boolean,
+    isSearch: {
+      type: Boolean,
+      default: false
+    }
   },
   components: {
-    Left
+    Left,
+    Search2
   },
-  setup (props) {
+  setup (props, ctx) {
     const title = ref('')
+    const searchVal = ref('')
     const onClick = () => {
       console.log('click')
     }
@@ -43,26 +63,37 @@ export default {
       return {
         menuBottonTop,
         navBarHeight,
-        statusBarHeight
+        statusBarHeight,
+        width: menuButtonObject.width
       }
     }
     const style = computed(() => {
-      const { navBarHeight, statusBarHeight } = getNavHeight()
+      const { navBarHeight, statusBarHeight, width } = getNavHeight()
       return {
         height: navBarHeight + 'px',
         'padding-top': statusBarHeight + 'px',
-        'padding-left': props.showBack ? '10px' : '18px',
-        'padding-right': props.showBack ? '10px' : '18px'
+        'padding-left': props.showBack ? '10px' : (props.isSearch ? 0 : '18px'),
+        'padding-right': props.showBack ? '10px' : (props.isSearch ? width + 10 + 'px' : '18px')
       }
     })
     const back = () => {
       router.back()
     }
+    const handleClear = () => {
+      searchVal.value = ''
+    }
+    const handleSearchChange = (val) => {
+      console.log(val)
+      ctx.emit('search', val)
+    }
     return {
       style,
       title,
       onClick,
-      back
+      back,
+      searchVal,
+      handleClear,
+      handleSearchChange
     }
   }
 }
@@ -76,11 +107,17 @@ export default {
   .nut-navbar {
     box-shadow: none;
   }
+  .center {
+    color: #333333;
+    width: 100%;
+    text-align: center;
+  }
 }
 .navbar-title {
   color: #fff;
   font-weight: 500;
 }
+
 .navbar-box {
   flex: 1;
   &--back {

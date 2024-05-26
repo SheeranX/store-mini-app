@@ -58,6 +58,7 @@ export default {
     });
     const handleClick = () => {
       console.log('click')
+      router.navigate('search')
     };
 
     const handleItemClick = (item) => {

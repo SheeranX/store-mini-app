@@ -14,6 +14,12 @@ const tabbar = [{
 const subPagesRoute = [{
     name: 'product-details',
     path: 'subpages/product-details/index'
+}, {
+    name: 'search',
+    path: 'subpages/search-page/index'
+}, {
+    name: 'result',
+    path: 'subpages/result-page/index'
 }]
 
 const getAllRoute = () => {

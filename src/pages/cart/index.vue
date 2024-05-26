@@ -1,4 +1,5 @@
 <template>
+  <Navbar name="购物车" align="center"></Navbar>
   <view class="cart-wrapper">
     <template v-if="list.length">
       <cart-item v-for="(item, index) in list" :key="index" class="cart-wrapper-item" @sku-click="handleSkuClick"></cart-item>
