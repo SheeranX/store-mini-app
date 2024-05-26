@@ -77,15 +77,6 @@ export default {
 <style lang="scss">
 .home-page {
   position: relative;
-  .banner {
-    position: absolute;
-    background: linear-gradient(to bottom, #f36409, #EB4D50);
-    width: 100vw;
-    border-bottom-right-radius: 80px;
-    border-bottom-left-radius: 80px;
-    height: 25vh;
-    z-index: -1;
-  }
   &-content-swipe {
     padding: 0 32px;
     border-radius: 8px;

@@ -9,7 +9,7 @@
     "enhance": false,
     "compileHotReLoad": false,
     "postcss": false,
-    "minified": false,
+    "minified": true,
     "libVersion": "3.4.2"
   },
   "compileType": "miniprogram"

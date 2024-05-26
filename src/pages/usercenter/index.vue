@@ -1,24 +1,48 @@
 <template>
   <Navbar name="个人中心" align="center"></Navbar>
-  <view class="index">
-    <view>
-      <img src="" alt="">
-    </view>
-    {{ msg }} <Dongdong />
-    <view class="btn">
-      <nut-button type="primary" @click="handleClick('text', msg2, true)">点我</nut-button>
-    </view>
-    <nut-toast :msg="msg2" v-model:visible="show" :type="type" :cover="cover"/>
+  <div class="banner center-banner"></div>
+  <view class="user-center-page">
+    <div class="user-center--avatar">
+      <nut-avatar size="large"><img :src="url" /> </nut-avatar>
+      <h4 class="user-center--name">nickname</h4>
+    </div>
+    <div class="user-center-order zIndex-2">
+      <box-card main-title="我的订单" is-more>
+        <nut-grid :border="false">
+          <nut-grid-item text="待付款"><IconFont :name="iconWaitPay" size="30px"/></nut-grid-item>
+          <nut-grid-item text="待发货"><IconFont :name="iconUnSend" size="30px"/></nut-grid-item>
+          <nut-grid-item text="待收货"><IconFont :name="iconGet" size="30px"/></nut-grid-item>
+          <nut-grid-item text="退款/售后"><IconFont :name="iconWidthdraw" size="30px"/></nut-grid-item>
+        </nut-grid>
+      </box-card>
+    </div>
+    <div class="user-center-service zIndex-2">
+      <box-card main-title="我的服务">
+        <nut-grid :border="false">
+          <nut-grid-item text="官方客服"><IconFont :name="iconKefu" size="30px"/></nut-grid-item>
+          <nut-grid-item text="关于我们"><IconFont :name="iconAbout" size="30px"/></nut-grid-item>
+        </nut-grid>
+      </box-card>
+    </div>
   </view>
 </template>
 
 <script>
 import { reactive, toRefs } from 'vue';
-import { Dongdong } from '@nutui/icons-vue-taro';
+import { Dongdong, IconFont } from '@nutui/icons-vue-taro';
+import BoxCard from './widgets/box-card.vue'
+const iconWaitPay = require('@/assets/icons/icon-wait-pay.png')
+const iconUnSend = require('@/assets/icons/icon-unsend.png')
+const iconGet = require('@/assets/icons/icon-get.png')
+const iconWidthdraw = require('@/assets/icons/icon-withdraw.png')
+const iconKefu = require('@/assets/icons/icon-kefu.png')
+const iconAbout = require('@/assets/icons/icon-about.png')
 export default {
   name: 'Index',
   components: {
-    Dongdong
+    BoxCard,
+    Dongdong,
+    IconFont
   },
   setup() {
     const state = reactive({
@@ -26,9 +50,9 @@ export default {
       msg2: '你成功了～',
       type: 'text',
       show: false,
-      cover: false
+      cover: false,
+      url: 'https://img12.360buyimg.com/imagetools/jfs/t1/196430/38/8105/14329/60c806a4Ed506298a/e6de9fb7b8490f38.png'
     });
-
     const handleClick = (type, msg, cover = false) => {
       state.show = true;
       state.msg2 = msg;
@@ -38,17 +62,48 @@ export default {
 
     return {
       ...toRefs(state),
-      handleClick
+      handleClick,
+      iconWaitPay,
+      iconUnSend,
+      iconGet,
+      iconWidthdraw,
+      iconKefu,
+      iconAbout
     }
   }
 }
 </script>
 
 <style lang="scss">
-.index {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+.center-banner {
+  z-index: 1;
+}
+.zIndex-2 {
+  z-index: 2;
+  position: relative;
+}
+.user-center-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  padding: 20px;
+  background: #efefef;
+  height: 100vh;
+  .user-center--avatar {
+    display: flex;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    column-gap: 20px;
+  }
+  .user-center-order {
+    .nut-cell {
+      box-shadow: none;
+    }
+  }
+  .user-center--name {
+    color: #fff;
+  }
 }
 </style>
