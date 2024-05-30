@@ -39,7 +39,7 @@ declare module '@vue/runtime-core' {
     NutTabPane: typeof import('@nutui/nutui-taro')['TabPane']
     NutTabs: typeof import('@nutui/nutui-taro')['Tabs']
     NutTag: typeof import('@nutui/nutui-taro')['Tag']
-    OperateBar: typeof import('./src/components/common/operate-bar.vue')['default']
+    OperateBar: typeof import('./src/components/common/operate-bar/index.vue')['default']
     OrderBuy: typeof import('./src/components/common/operate-bar/order-buy.vue')['default']
     Product: typeof import('./src/components/common/product.vue')['default']
     RecommandCol: typeof import('./src/components/common/recommand/recommand-col.vue')['default']
