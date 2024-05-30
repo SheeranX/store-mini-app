@@ -49,7 +49,9 @@
       <nut-tab-pane title="产品参数" pane-key="2"> Content 2 </nut-tab-pane>
       <nut-tab-pane title="包装售后" pane-key="3"> Content 3 </nut-tab-pane>
     </nut-tabs>
-    <operate-bar></operate-bar>
+    <div class="product-details--bottom">
+      <bottom-bar @purchase="handlePurchase" @addCart="handleAddCart"></bottom-bar>
+    </div>
   </div>
 </template>
 <script setup>
@@ -58,7 +60,10 @@ import CustomSwipe from "@/components/common/custom-swipe.vue";
 import CustomPopover from "@/components/common/custom-popover.vue";
 import {onMounted, ref} from "vue";
 import DATA from "@/pages/cart/widgets/3x_data";
-import OperateBar from '@/components/common/operate-bar.vue'
+import { useCart } from "@/hook/add-cart";
+import BottomBar from '@/components/common/operate-bar/index.vue'
+import toast from "@/utils/toast";
+
 const list = ['https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg',
   'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
   'https://storage.360buyimg.com/jdc-article/welcomenutui.jpg',
@@ -92,6 +97,20 @@ const close = () => {}
 const clickBtnOperate = (params) => {
   skuVisible.value = false
 }
+const handleAddCart = () => {
+  const cart = useCart()
+  cart.add({
+    productId: '1-1',
+    id: '1',
+    number: 1,
+    img: '/',
+    name: '测试',
+    sku: 'xl' })
+  toast.success('添加成功')
+}
+const handlePurchase = () => {
+
+}
 onMounted(() => {
   const { Sku, Goods, imagePathMap } = DATA
   data.value.sku = Sku
@@ -110,6 +129,14 @@ onMounted(() => {
   .origin-price {
     color: #666666;
     margin-left: 10px;
+  }
+  &--bottom {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 20px;
+    background: #fff;
   }
   &--sku {
     .txt-gray {

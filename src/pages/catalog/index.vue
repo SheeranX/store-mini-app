@@ -11,6 +11,7 @@
 import { reactive } from 'vue';
 import staticData from './categoryData'
 import Navbar from "@/components/common/navbar.vue";
+import router from '@/routes'
 const data = reactive({
   categoryInfo: staticData.categoryInfo,
   category: staticData.categoryInfo.category,
@@ -26,6 +27,7 @@ const change = (index) => {
 }
 const onChange = (val) => {
   console.log(val)
+  router.navigate('result')
 }
 </script>
 

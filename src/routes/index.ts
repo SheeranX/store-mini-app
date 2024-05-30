@@ -9,6 +9,7 @@ type Route = {
     isTab: boolean
 }
 export const getQuery = (params: object = {}) => {
+    console.log(qs.stringify(params))
     return qs.stringify(params)
 }
 

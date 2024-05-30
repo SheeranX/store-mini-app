@@ -7,8 +7,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AddCart: typeof import('./src/components/common/operate-bar/add-cart.vue')['default']
+    Box: typeof import('./src/components/common/box.vue')['default']
     Card: typeof import('./src/components/common/recommand/card.vue')['default']
-    Container: typeof import('./src/components/common/recommand/container.vue')['default']
+    Container: typeof import('./src/components/common/container.vue')['default']
     CustomPopover: typeof import('./src/components/common/custom-popover.vue')['default']
     CustomSwipe: typeof import('./src/components/common/custom-swipe.vue')['default']
     Navbar: typeof import('./src/components/common/navbar.vue')['default']
@@ -24,7 +26,6 @@ declare module '@vue/runtime-core' {
     NutEmpty: typeof import('@nutui/nutui-taro')['Empty']
     NutGrid: typeof import('@nutui/nutui-taro')['Grid']
     NutGridItem: typeof import('@nutui/nutui-taro')['GridItem']
-    NutIcon: typeof import('@nutui/nutui-taro')['Icon']
     NutInputNumber: typeof import('@nutui/nutui-taro')['InputNumber']
     NutMenu: typeof import('@nutui/nutui-taro')['Menu']
     NutMenuItem: typeof import('@nutui/nutui-taro')['MenuItem']
@@ -38,8 +39,9 @@ declare module '@vue/runtime-core' {
     NutTabPane: typeof import('@nutui/nutui-taro')['TabPane']
     NutTabs: typeof import('@nutui/nutui-taro')['Tabs']
     NutTag: typeof import('@nutui/nutui-taro')['Tag']
-    NutToast: typeof import('@nutui/nutui-taro')['Toast']
     OperateBar: typeof import('./src/components/common/operate-bar.vue')['default']
+    OrderBuy: typeof import('./src/components/common/operate-bar/order-buy.vue')['default']
+    Product: typeof import('./src/components/common/product.vue')['default']
     RecommandCol: typeof import('./src/components/common/recommand/recommand-col.vue')['default']
     RecommandRow: typeof import('./src/components/common/recommand/recommand-row.vue')['default']
   }

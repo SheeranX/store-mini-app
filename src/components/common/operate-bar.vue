@@ -17,7 +17,7 @@
         </template>
         加入购物车
       </nut-button>
-      <nut-button shape="square" type="primary" color="linear-gradient(to right, #ff6034, #ee0a24)">
+      <nut-button shape="square" type="primary" color="linear-gradient(to right, #ff6034, #ee0a24)" @click="handlePurchase">
         <template #icon>
           <Uploader />
         </template>
@@ -32,17 +32,20 @@ import router from '@/routes/index'
 const backHome = () => {
   router.navigate('home')
 }
+const emits = defineEmits(['purchase'])
+const handlePurchase = () => {
+  emits('purchase')
+}
 </script>
 <style lang="less">
 .operate-bar {
   background: #fff;
   position: fixed;
   bottom: 0;
-  justify-content: space-around;
+  padding: 20px 20px 40px;
   width: 100%;
   align-items: center;
   box-sizing: border-box;
-  padding: 20px 20px 40px;
   display: flex;
   justify-content: space-between;
   &--icon {

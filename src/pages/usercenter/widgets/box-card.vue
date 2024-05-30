@@ -3,7 +3,7 @@
     <div class="box-card-wrapper">
       <div class="box-card-wrapper-top">
         <h4 class="box-card-wrapper-top__title">{{mainTitle}}</h4>
-        <div class="box-card-wrapper-top__more" v-if="isMore">
+        <div class="box-card-wrapper-top__more" v-if="isMore" @click="checkMore">
           <slot name="right">
             <span>更多</span>
           </slot>
@@ -20,6 +20,10 @@ defineProps({
   mainTitle: String,
   isMore: Boolean
 })
+const emits = defineEmits(['checkMore'])
+const checkMore = () => {
+  emits('checkMore')
+}
 </script>
 <style lang="scss">
 .box-card-wrapper {

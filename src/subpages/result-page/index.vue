@@ -13,6 +13,7 @@
             :shop-desc="item.shopDesc"
             :vip-price="false"
             v-for="(item, index) in list"
+            @click="handleClick(item)"
         >
           <template #price>
             <nut-price :price="199" size="normal" />
@@ -32,6 +33,7 @@
 </template>
 <script setup>
 import {ref} from "vue";
+import router from '@/routes'
 const val1 = ref(0)
 const val2 = ref('a')
 const options1 = ref([
@@ -63,6 +65,9 @@ const list = ref([{
   shopName: '阳澄湖大闸蟹自营店>'
 }])
 const handleSearch = () => {}
+const handleClick = (item) => {
+  router.navigate('product-details', item)
+}
 </script>
 <style lang="less">
 .search-box--result {

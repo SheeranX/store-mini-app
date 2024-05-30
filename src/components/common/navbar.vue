@@ -15,6 +15,7 @@
           </template>
         </nut-searchbar>
       </div>
+      <div v-if="subPageTitle" class="navbar-subtitle" :style="{ 'padding-right': menuWidth + 'px' }">{{subPageTitle}}</div>
     </div>
   </div>
 </template>
@@ -37,6 +38,7 @@ export default {
       type: Boolean,
       default: true
     },
+    subPageTitle: String,
     showBack: Boolean,
     isSearch: {
       type: Boolean,
@@ -50,6 +52,7 @@ export default {
   setup (props, ctx) {
     const title = ref('')
     const searchVal = ref('')
+    const menuWidth = ref(0)
     const onClick = () => {
       console.log('click')
     }
@@ -59,6 +62,7 @@ export default {
       let statusBarHeight = sysinfo.statusBarHeight; // 获取状态栏高度
       let menuBottonHeight =  menuButtonObject.height; //获取胶囊顶部高度
       let menuBottonTop =  menuButtonObject.top; // 获取胶囊距离顶部的高度
+      menuWidth.value = menuButtonObject.width
       let navBarHeight = statusBarHeight + menuBottonHeight + (menuBottonTop - statusBarHeight) * 2 ; //计算nav导航栏的高度（上图蓝色线段的长度）
       return {
         menuBottonTop,
@@ -93,7 +97,8 @@ export default {
       back,
       searchVal,
       handleClear,
-      handleSearchChange
+      handleSearchChange,
+      menuWidth
     }
   }
 }
@@ -120,6 +125,12 @@ export default {
 
 .navbar-box {
   flex: 1;
+  display: flex;
+  align-items: center;
+  .navbar-subtitle {
+    flex: 1;
+    text-align: center;
+  }
   &--back {
     width: 60px;
     height: 60px;

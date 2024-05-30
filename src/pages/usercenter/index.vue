@@ -7,12 +7,12 @@
       <h4 class="user-center--name">nickname</h4>
     </div>
     <div class="user-center-order zIndex-2">
-      <box-card main-title="我的订单" is-more>
+      <box-card main-title="我的订单" is-more @checkMore="checkMore">
         <nut-grid :border="false">
-          <nut-grid-item text="待付款"><IconFont :name="iconWaitPay" size="30px"/></nut-grid-item>
-          <nut-grid-item text="待发货"><IconFont :name="iconUnSend" size="30px"/></nut-grid-item>
-          <nut-grid-item text="待收货"><IconFont :name="iconGet" size="30px"/></nut-grid-item>
-          <nut-grid-item text="退款/售后"><IconFont :name="iconWidthdraw" size="30px"/></nut-grid-item>
+          <nut-grid-item text="待付款" @click="checkMore"><IconFont :name="iconWaitPay" size="30px"/></nut-grid-item>
+          <nut-grid-item text="待发货" @click="checkMore"><IconFont :name="iconUnSend" size="30px"/></nut-grid-item>
+          <nut-grid-item text="待收货" @click="checkMore"><IconFont :name="iconGet" size="30px"/></nut-grid-item>
+          <nut-grid-item text="退款/售后" @click="checkMore"><IconFont :name="iconWidthdraw" size="30px"/></nut-grid-item>
         </nut-grid>
       </box-card>
     </div>
@@ -31,6 +31,7 @@
 import { reactive, toRefs } from 'vue';
 import { Dongdong, IconFont } from '@nutui/icons-vue-taro';
 import BoxCard from './widgets/box-card.vue'
+import router from '@/routes'
 const iconWaitPay = require('@/assets/icons/icon-wait-pay.png')
 const iconUnSend = require('@/assets/icons/icon-unsend.png')
 const iconGet = require('@/assets/icons/icon-get.png')
@@ -59,7 +60,9 @@ export default {
       state.type = type;
       state.cover = cover;
     };
-
+    const checkMore = () => {
+      router.navigate('order-list')
+    }
     return {
       ...toRefs(state),
       handleClick,
@@ -68,13 +71,17 @@ export default {
       iconGet,
       iconWidthdraw,
       iconKefu,
-      iconAbout
+      iconAbout,
+      checkMore
     }
   }
 }
 </script>
 
 <style lang="scss">
+page {
+  background: #efefef;
+}
 .center-banner {
   z-index: 1;
 }
@@ -89,7 +96,6 @@ export default {
   row-gap: 15px;
   padding: 20px;
   background: #efefef;
-  height: 100vh;
   .user-center--avatar {
     display: flex;
     position: relative;

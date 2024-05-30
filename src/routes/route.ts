@@ -20,6 +20,15 @@ const subPagesRoute = [{
 }, {
     name: 'result',
     path: 'subpages/result-page/index'
+}, {
+    name: 'order-list',
+    path: 'subpages/order-list/index'
+}, {
+    name: 'order-details',
+    path: 'subpages/order-details/index'
+}, {
+    name: 'order-buy',
+    path: 'subpages/order-buy/index'
 }]
 
 const getAllRoute = () => {

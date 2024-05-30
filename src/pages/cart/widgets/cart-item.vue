@@ -1,7 +1,7 @@
 <template>
-  <nut-swipe>
+  <nut-swipe :disabled="isOrder">
     <div class="cart-item-box">
-      <nut-checkbox label="1" v-model="checked"></nut-checkbox>
+      <nut-checkbox label="1" v-model="checked" v-if="!isOrder"></nut-checkbox>
       <div class="cart-item-box--content">
         <img src="https://m.360buyimg.com/n2/jfs/t1/109937/34/10781/169393/5e81b698Ede55aa35/62f6c77ce58c8866.jpg" class="cart-item-box--content__img"/>
         <div class="cart-item-box--container">
@@ -10,8 +10,8 @@
             【大行折叠自行车】p8禧玛诺套件折叠自行车
           </div>
           <div class="cart-item-box--sku" @click="handleSku">
-            <div class="cart-item-box--sku__text"><nut-ellipsis direction="end" content="墨绿/20速,17寸身高125cm,17寸身高125cm" rows="1"></nut-ellipsis></div>
-            <IconFont name="down-arrow" color="#999999" size="14px"></IconFont>
+            <div class="cart-item-box--sku__text"><nut-ellipsis direction="end" content="墨绿/20速,17寸身高125cm,17寸身高125cm" :rows="isOrder ? 2: 1"></nut-ellipsis></div>
+            <IconFont name="down-arrow" color="#999999" size="14px" v-if="!isOrder"></IconFont>
           </div>
           <div class="cart-item-box-bottom">
             <div class="cart-item-box-bottom__price">
@@ -33,6 +33,9 @@ import { ref } from "vue"
 const emits = defineEmits(['sku-click'])
 const number = ref(0)
 const checked = ref(false)
+defineProps({
+  isOrder: Boolean
+})
 const data = ref({
   sku: [],
   goods: {}
@@ -45,6 +48,7 @@ const handleSku = (id) => {
 .cart-item-box {
   display: flex;
   padding: 10px 20px;
+  overflow: hidden;
   font-size: 28px;
   color: #333;
   .nut-checkbox {

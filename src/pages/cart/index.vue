@@ -1,11 +1,18 @@
 <template>
   <Navbar name="购物车" align="center"></Navbar>
   <view class="cart-wrapper">
+    <div class="cart-wrapper--pay" v-if="list.length">
+      <nut-checkbox v-model="checkAll">全选</nut-checkbox>
+      <div class="cart-wrapper--pay--right">
+        <span class="cart-wrapper--pay--right__total">总计: <span class="cart-wrapper--pay--right__total--num">111</span></span>
+        <nut-button type="primary">结算: 共5件</nut-button>
+      </div>
+    </div>
     <template v-if="list.length">
       <cart-item v-for="(item, index) in list" :key="index" class="cart-wrapper-item" @sku-click="handleSkuClick"></cart-item>
     </template>
     <nut-empty description="购物车空空如也，快去选购吧～" v-else></nut-empty>
-    <Recommand theme-title="猜你喜欢" direction="col"></Recommand>
+    <Recommand theme-title="猜你喜欢" direction="col" v-if="!list.length"></Recommand>
     <nut-sku
         v-model:visible="skuVisible"
         :sku="data.sku"
@@ -18,11 +25,11 @@
 </template>
 
 <script>
-import {onMounted, reactive, ref, toRefs} from 'vue';
+import {computed, onMounted, reactive, ref, toRefs} from 'vue';
 import CartItem from './widgets/cart-item.vue'
 import DATA from "@/pages/cart/widgets/3x_data";
 import Recommand from '@/components/common/recommand/container.vue'
-
+import { useCart } from "@/hook/add-cart";
 export default {
   name: 'cart',
   components: {
@@ -30,9 +37,11 @@ export default {
     CartItem
   },
   setup() {
-    const state = reactive({
-      list: []
-    });
+    const { cartList } = useCart()
+    const list = computed(() => {
+      return cartList.value
+    })
+    const checkAll = ref(false)
     const skuVisible = ref(false)
     const data = ref({
       sku: [],
@@ -60,23 +69,21 @@ export default {
       data.value.goods = Goods
     })
     const handleClick = (type, msg, cover = false) => {
-      state.show = true;
-      state.msg2 = msg;
-      state.type = type;
-      state.cover = cover;
+      // todo
     };
     const handleSkuClick = () => {
       skuVisible.value = true
     }
     return {
-      ...toRefs(state),
       handleClick,
       skuVisible,
       data,
       close,
       selectSku,
       clickBtnOperate,
-      handleSkuClick
+      handleSkuClick,
+      checkAll,
+      list
     }
   }
 }
@@ -84,8 +91,37 @@ export default {
 
 <style lang="scss">
 .cart-wrapper {
+  padding-bottom: 80px;
+  box-sizing: border-box;
   &-item {
     border-bottom: 1px solid #f3f3f3;
+  }
+  &--pay {
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    left: 0;
+    right: 0;
+    box-shadow: 0 -10px 30px rgb(0, 0, 0, 0.2);
+    &--right {
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+      &__total {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        font-size: 28px;
+        &--num {
+          font-size: 40px;
+          color: var(--nut-primary-color, #fa2c19);
+        }
+      }
+    }
   }
   .nut-sku-content {
     box-sizing: border-box;
