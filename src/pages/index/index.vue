@@ -29,6 +29,7 @@ import CustomSwipe from './widgets/custom-swipe.vue'
 import GridCell from './widgets/gird-cell.vue'
 import Recommand from '@/components/common/recommand/container.vue'
 import router from '@/routes'
+import {getBanner} from "@/api";
 export default {
   name: 'Home',
   components: {
@@ -65,6 +66,9 @@ export default {
       console.log(item)
       router.navigate('product-details')
     }
+    getBanner().then(res => {
+      console.log(res, 'res')
+    })
     return {
       ...toRefs(state),
       handleClick,

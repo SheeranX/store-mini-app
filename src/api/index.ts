@@ -1,0 +1,1 @@
+export { getBanner } from './home'
