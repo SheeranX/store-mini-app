@@ -1,14 +1,14 @@
 <template>
-  <div class="recommand-wrapper">
-    <div class="head-title" :class="{ center: direction === 'col' }">
-      <div>{{themeTitle}}</div>
-      <div class="more" v-if="direction === 'row'">更多</div>
-    </div>
-    <div class="recommand-wrapper--content">
+  <view class="recommand-wrapper">
+    <view class="head-title" :class="{ center: direction === 'col' }">
+      <view>{{themeTitle}}</view>
+      <view class="more" v-if="direction === 'row'">更多</view>
+    </view>
+    <view class="recommand-wrapper--content">
       <RecommandRow v-if="direction === 'row'" @item-click="handleClick"></RecommandRow>
       <RecommandCol v-else @item-click="handleClick"></RecommandCol>
-    </div>
-  </div>
+    </view>
+  </view>
 </template>
 <script setup>
 import RecommandRow from './recommand-row.vue'

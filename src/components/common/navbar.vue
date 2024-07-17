@@ -1,11 +1,11 @@
 <template>
-  <div class="navbar-wrapper" :style="style">
-    <div class="navbar-title" v-if="showTitle" :class="{ center: align === 'center' }">{{name}}</div>
-    <div class="navbar-box" v-else>
-      <div class="navbar-box--back" @click="back" v-if="!isSearch">
+  <view class="navbar-wrapper" :style="style">
+    <view class="navbar-title" v-if="showTitle" :class="{ center: align === 'center' }">{{name}}</view>
+    <view class="navbar-box" v-else>
+      <view class="navbar-box--back" @click="back" v-if="!isSearch">
         <Left color="#fff"></Left>
-      </div>
-      <div class="navbar-search" v-else>
+      </view>
+      <view class="navbar-search" v-else>
         <nut-searchbar v-model="searchVal" @clear="handleClear" @search="handleSearchChange" placeholder="输入商品名搜索" autofocus>
           <template #leftout>
             <Left @click="back"/>
@@ -14,10 +14,10 @@
             <Search2 color="#999"/>
           </template>
         </nut-searchbar>
-      </div>
-      <div v-if="subPageTitle" class="navbar-subtitle" :style="{ 'padding-right': menuWidth + 'px' }">{{subPageTitle}}</div>
-    </div>
-  </div>
+      </view>
+      <view v-if="subPageTitle" class="navbar-subtitle" :style="{ 'padding-right': menuWidth + 'px' }">{{subPageTitle}}</view>
+    </view>
+  </view>
 </template>
 <script>
 import { computed, ref } from 'vue'

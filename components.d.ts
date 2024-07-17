@@ -43,6 +43,7 @@ declare module '@vue/runtime-core' {
     OrderBuy: typeof import('./src/components/common/operate-bar/order-buy.vue')['default']
     Product: typeof import('./src/components/common/product.vue')['default']
     RecommandCol: typeof import('./src/components/common/recommand/recommand-col.vue')['default']
+    RecommandContainer: typeof import('./src/components/common/recommand/recommand-container.vue')['default']
     RecommandRow: typeof import('./src/components/common/recommand/recommand-row.vue')['default']
   }
 }

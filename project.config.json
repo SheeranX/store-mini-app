@@ -4,7 +4,7 @@
   "description": "私域电商小程序",
   "appid": "wx30787e3830f20709",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "enhance": false,
     "compileHotReLoad": false,

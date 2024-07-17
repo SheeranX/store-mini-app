@@ -1,7 +1,7 @@
 <template>
-  <div class="good-item-row">
+  <view class="good-item-row">
     <Card v-for="(item, index) in 10" :key="index" @click="handleClick(item)"></Card>
-  </div>
+  </view>
 </template>
 <script setup>
 import Card from './card.vue'

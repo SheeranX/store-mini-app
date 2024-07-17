@@ -33,7 +33,7 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  plugins: ['taro-plugin-environment', '@tarojs/plugin-html'],
+  plugins: ['@tarojs/plugin-platform-h5'],
   defineConstants: {
   },
   copy: {

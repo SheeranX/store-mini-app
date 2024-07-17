@@ -28,7 +28,7 @@
 import {computed, onMounted, reactive, ref, toRefs} from 'vue';
 import CartItem from './widgets/cart-item.vue'
 import DATA from "@/pages/cart/widgets/3x_data";
-import Recommand from '@/components/common/recommand/container.vue'
+import Recommand from '@/components/common/recommand/recommand-container.vue'
 import { useCart } from "@/hook/add-cart";
 export default {
   name: 'cart',

@@ -1,5 +1,5 @@
 import Taro from "@tarojs/taro";
-const host = process.env.TARO_APP_HOST
+const host = 'http://localhost:30001'
 const API = '/api'
 
 type RequestMethod = 'get' | 'post' | 'put' | 'delete'

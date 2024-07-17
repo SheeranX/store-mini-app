@@ -1,6 +1,6 @@
 <template>
   <view class="home-page">
-    <div class="banner"></div>
+    <view class="banner"></view>
     <Navbar name="婴幼儿品牌馆"></Navbar>
     <view class="home-page-content">
       <nut-searchbar v-model="search" @click-input="handleClick" :disabled="true" background="none">
@@ -8,12 +8,12 @@
           <Search></Search>
         </template>
       </nut-searchbar>
-      <div class="home-page-content-swipe">
+      <view class="home-page-content-swipe">
         <CustomSwipe :list="list"></CustomSwipe>
-      </div>
-      <div class="home-page-content-grid">
+      </view>
+      <view class="home-page-content-grid">
         <GridCell :list="gridList"></GridCell>
-      </div>
+      </view>
       <Recommand theme-title="热门推荐" @item-click="handleItemClick"></Recommand>
       <Recommand theme-title="新品上架" @item-click="handleItemClick"></Recommand>
       <Recommand theme-title="特价专区" @item-click="handleItemClick"></Recommand>
@@ -27,7 +27,7 @@ import Navbar from '@/components/common/navbar.vue'
 import { Search } from '@nutui/icons-vue-taro'
 import CustomSwipe from './widgets/custom-swipe.vue'
 import GridCell from './widgets/gird-cell.vue'
-import Recommand from '@/components/common/recommand/container.vue'
+import Recommand from '@/components/common/recommand/recommand-container.vue'
 import router from '@/routes'
 import {getBanner} from "@/api";
 export default {
