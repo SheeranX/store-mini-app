@@ -10,30 +10,33 @@
         <nut-card
             :img-url="item.imgUrl"
             :title="item.title"
-            :shop-desc="item.shopDesc"
+            :shop-desc="item.desc"
             :vip-price="false"
             v-for="(item, index) in list"
             @click="handleClick(item)"
         >
           <template #price>
-            <nut-price :price="199" size="normal" />
-            <nut-price :price="299" :decimal-digits="0" strike-through size="small" class="price-disable"/>
+            <nut-price :price="item.price" size="normal" />
+            <nut-price :price="item.originPrice" :decimal-digits="0" strike-through size="small" class="price-disable"/>
           </template>
-          <template #prolist>
-            <div class="card-tag-list">
-              <span class="tag">活鲜</span>
-              <span class="tag">礼盒</span>
-              <span class="tag">国产</span>
-            </div>
-          </template>
+<!--          <template #prolist>-->
+<!--            <div class="card-tag-list">-->
+<!--              <span class="tag">活鲜</span>-->
+<!--              <span class="tag">礼盒</span>-->
+<!--              <span class="tag">国产</span>-->
+<!--            </div>-->
+<!--          </template>-->
         </nut-card>
       </scroll-view>
     </div>
   </div>
 </template>
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import router from '@/routes'
+import { search } from "@/api";
+import {host} from "@/utils/request";
+
 const val1 = ref(0)
 const val2 = ref('a')
 const options1 = ref([
@@ -47,27 +50,23 @@ const options2 = ref([
   { text: '销量排序', value: 'c' }
 ])
 const onChange = () => {}
-const list = ref([{
-  imgUrl: '//img10.360buyimg.com/n2/s240x240_jfs/t1/210890/22/4728/163829/6163a590Eb7c6f4b5/6390526d49791cb9.jpg!q70.jpg',
-  title: '【活蟹】湖塘煙雨 阳澄湖大闸蟹公4.5两 母3.5两 4对8只 鲜活生鲜螃蟹现货水产礼盒海鲜水',
-  price: '388',
-  vipPrice: '378',
-  shopDesc: '新品',
-  delivery: '厂商配送',
-  shopName: '阳澄湖大闸蟹自营店>'
-}, {
-  imgUrl: '//img10.360buyimg.com/n2/s240x240_jfs/t1/210890/22/4728/163829/6163a590Eb7c6f4b5/6390526d49791cb9.jpg!q70.jpg',
-  title: '【活蟹】湖塘煙雨 阳澄湖大闸蟹公4.5两 母3.5两 4对8只 鲜活生鲜螃蟹现货水产礼盒海鲜水',
-  price: '388',
-  vipPrice: '378',
-  shopDesc: '新品',
-  delivery: '厂商配送',
-  shopName: '阳澄湖大闸蟹自营店>'
-}])
-const handleSearch = () => {}
-const handleClick = (item) => {
-  router.navigate('product-details', item)
+const list = ref([])
+const handleSearch = (val) => {
+  getResult(val)
 }
+const handleClick = (item) => {
+  router.navigate('product-details', { id: item.id })
+}
+const getResult = (key) => {
+  console.log(key)
+  search(key).then(res => {
+    list.value = res.map(item => ({ ...item, originPrice: item.price * 1.2, imgUrl:host + item.imgUrls.split(',')[0] }))
+  })
+}
+onMounted(() => {
+  const route = router.route()
+  getResult(decodeURI(route.params.key))
+})
 </script>
 <style lang="less">
 .search-box--result {

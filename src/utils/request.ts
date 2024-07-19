@@ -1,6 +1,7 @@
 import Taro from "@tarojs/taro";
-const host = 'http://localhost:30001'
 const API = '/api'
+// export const host = 'http://localhost:30001'
+export const host = 'https://www.ringsky.online'
 
 type RequestMethod = 'get' | 'post' | 'put' | 'delete'
 
@@ -22,8 +23,13 @@ export default (url: string, options?: iOption) => {
             url: host + API + url,
             data: options?.data,
             method,
-            success (res) {
-                resolve(res)
+            success ({ data }) {
+                const { code, data: resData } = data
+                if (code === 200) {
+                    resolve(resData)
+                } else {
+                    reject()
+                }
             },
             fail (e) {
                 reject(e)

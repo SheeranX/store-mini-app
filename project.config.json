@@ -1,7 +1,7 @@
 {
   "miniprogramRoot": "./dist",
-  "projectname": "my-store",
-  "description": "私域电商小程序",
+  "projectname": "mini-app",
+  "description": "私域电商",
   "appid": "wx30787e3830f20709",
   "setting": {
     "urlCheck": false,
@@ -9,8 +9,7 @@
     "enhance": false,
     "compileHotReLoad": false,
     "postcss": false,
-    "minified": true,
-    "libVersion": "3.4.2"
+    "minified": false
   },
   "compileType": "miniprogram"
 }

@@ -1,15 +1,15 @@
 import Taro from "@tarojs/taro";
 const { getRoutes, getAllRoute } = require('./route')
+import { getCurrentInstance } from '@tarojs/taro';
+
 import qs from 'qs'
 
-console.log(getRoutes())
 type Route = {
     name: string,
     path: string,
     isTab: boolean
 }
 export const getQuery = (params: object = {}) => {
-    console.log(qs.stringify(params))
     return qs.stringify(params)
 }
 
@@ -35,8 +35,17 @@ const back = (delta:number = 1) => {
     })
 }
 
+const route = () => {
+    const ins = getCurrentInstance()
+    const { path, params } = ins.router
+    return {
+        path,
+        params
+    }
+}
 export default {
     navigate,
     back,
-    getRoutes
+    getRoutes,
+    route
 }

@@ -1,47 +1,65 @@
 <template>
   <nut-swipe :disabled="isOrder">
     <div class="cart-item-box">
-      <nut-checkbox label="1" v-model="checked" v-if="!isOrder"></nut-checkbox>
+      <nut-checkbox v-model="model.checked" v-if="!isOrder" @change="handleChecked"></nut-checkbox>
       <div class="cart-item-box--content">
-        <img src="https://m.360buyimg.com/n2/jfs/t1/109937/34/10781/169393/5e81b698Ede55aa35/62f6c77ce58c8866.jpg" class="cart-item-box--content__img"/>
+        <image :src="model?.imgUrls[0]?.url" class="cart-item-box--content__img"/>
         <div class="cart-item-box--container">
-          <h4 class="cart-item-box--title">大行</h4>
+          <h4 class="cart-item-box--title">{{model.title}}</h4>
           <div class="cart-item-box--desc">
-            【大行折叠自行车】p8禧玛诺套件折叠自行车
+            {{model.desc}}
           </div>
           <div class="cart-item-box--sku" @click="handleSku">
-            <div class="cart-item-box--sku__text"><nut-ellipsis direction="end" content="墨绿/20速,17寸身高125cm,17寸身高125cm" :rows="isOrder ? 2: 1"></nut-ellipsis></div>
+            <div class="cart-item-box--sku__text"><nut-ellipsis direction="end" :content="model.sku" :rows="isOrder ? 2: 1"></nut-ellipsis></div>
             <IconFont name="down-arrow" color="#999999" size="14px" v-if="!isOrder"></IconFont>
           </div>
           <div class="cart-item-box-bottom">
             <div class="cart-item-box-bottom__price">
-              <nut-price :price="199" size="normal" />
+              <nut-price :price="model.price" size="normal" />
             </div>
-            <nut-input-number v-model="number" min="0"/>
+            <nut-input-number v-model="model.number" min="0" @change="handleChangeNumber"/>
           </div>
         </div>
       </div>
     </div>
     <template #right>
-      <nut-button shape="square" style="height: 100%" type="danger">删除</nut-button>
+      <nut-button shape="square" style="height: 100%" type="danger" @click="handleDelete">删除</nut-button>
     </template>
   </nut-swipe>
 </template>
 <script setup>
 import { IconFont } from '@nutui/icons-vue-taro'
-import { ref } from "vue"
-const emits = defineEmits(['sku-click'])
-const number = ref(0)
-const checked = ref(false)
-defineProps({
-  isOrder: Boolean
+import {ref, toRef, toRefs, watch} from "vue"
+const emits = defineEmits(['sku-click', 'item-delete', 'onUpdate:checked', 'onUpdate:number'])
+const props = defineProps({
+  isOrder: Boolean,
+  info: {
+    type: Object,
+    default: () => ({})
+  }
 })
+const model = ref(props.info)
 const data = ref({
   sku: [],
   goods: {}
 })
+watch(() => props.info, (val) => {
+  model.value = val
+  console.log(val, 'val')
+}, {
+  deep: true
+})
 const handleSku = (id) => {
   emits('sku-click', id)
+}
+const handleDelete = () => {
+  emits('item-delete', props.info)
+}
+const handleChecked = () => {
+  emits('onUpdate:info', model.value)
+}
+const handleChangeNumber = () => {
+  emits('onUpdate:info', model.value)
 }
 </script>
 <style lang="scss">

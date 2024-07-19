@@ -1,11 +1,11 @@
 {
   "miniprogramRoot": "./",
-  "projectname": "my-store",
-  "description": "私域电商小程序",
-  "appid": "touristappid",
+  "projectname": "mini-app",
+  "description": "私域电商",
+  "appid": "wx30787e3830f20709",
   "setting": {
     "urlCheck": true,
-    "es6": true,
+    "es6": false,
     "postcss": false,
     "minified": false
   },

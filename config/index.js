@@ -14,8 +14,8 @@ const NutUIResolver = () => {
 }
 
 const config = {
-  projectName: 'my-store',
-  date: '2024-5-17',
+  projectName: 'mini-app',
+  date: '2024-7-6',
   designWidth (input) {
     if (input?.file?.replace(/\\+/g, '/').indexOf('@nutui') > -1) {
       return 375
@@ -28,12 +28,9 @@ const config = {
     828: 1.81 / 2,
     375: 2 / 1
   },
-  alias: {
-    '@': path.resolve(__dirname, '..', 'src')
-  },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  plugins: ['@tarojs/plugin-platform-h5'],
+  plugins: ['@tarojs/plugin-html'],
   defineConstants: {
   },
   copy: {
@@ -44,11 +41,11 @@ const config = {
   },
   framework: 'vue3',
   compiler: {
-    type: 'webpack5',
+    type: 'webpack4',
     prebundle: { enable: false }
   },
-  cache: {
-    enable: false // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
+  alias: {
+    '@': path.resolve(__dirname, '..', 'src')
   },
   sass:{
     data: `@import "@nutui/nutui-taro/dist/styles/variables.scss";`

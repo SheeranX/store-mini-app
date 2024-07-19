@@ -1,14 +1,14 @@
 <template>
   <view class="good-item-col">
-    <Card v-for="(item, index) in 10" :key="index" @click="handleClick(item)"></Card>
+    <Card v-for="(item, index) in data" :key="index" @click="handleClick(item)" :info="item"></Card>
   </view>
 </template>
 <script setup>
 import Card from './card.vue'
 defineProps({
-  info: {
+  data: {
     type: Object,
-    default: () => ({})
+    default: () => []
   }
 })
 const emits = defineEmits(['item-click'])

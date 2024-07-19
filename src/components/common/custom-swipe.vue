@@ -5,13 +5,20 @@
       pagination-visible
   >
     <nut-swiper-item v-for="(item, index) in list" :key="index" :style="{ height }">
-      <image :src="item" alt="" style="height: 100%; width: 100%" draggable="false" />
+      <image :src="item.url" alt="" style="height: 100%; width: 100%" draggable="false" :mode="mode"/>
     </nut-swiper-item>
   </nut-swiper>
 </template>
 <script setup>
 defineProps({
-  list: Array,
+  list: {
+    type: Array,
+    default: () => []
+  },
+  mode: {
+    type: String,
+    default: 'aspectFit'
+  },
   height:{
     type: String,
     default: '150px'

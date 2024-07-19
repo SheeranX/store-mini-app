@@ -12,12 +12,20 @@ type cartInfo = {
 export const useCart = () => {
     const cartList = ref(getState(KEY) || [])
     const add = (params: cartInfo, key:string = 'id') => {
-        const item = cartList.value.find(i => params?.[key] === i?.[key])
-        item ? item.number++ : cartList.value.push(params)
+        const index = cartList.value.findIndex(i => params?.[key] === i?.[key])
+        if (index > -1) {
+            if (params.number === 1) {
+                cartList.value[index].number++
+            } else {
+                cartList.value[index].number = params.number
+            }
+        } else {
+            cartList.value.push(params)
+        }
         setState(KEY, cartList.value)
     }
-    const remove = id => {
-        const index = cartList.value.findIndex(i => i.id === id)
+    const remove = (id, prop:string = 'id') => {
+        const index = cartList.value.findIndex(i => i[prop] === id)
         cartList.value.splice(index, 1)
         setState(KEY, cartList.value)
     }

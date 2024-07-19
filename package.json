@@ -1,8 +1,8 @@
 {
-  "name": "my-store",
+  "name": "mini-app",
   "version": "1.0.0",
   "private": true,
-  "description": "私域电商小程序",
+  "description": "私域电商",
   "templateInfo": {
     "name": "vue3-NutUI4",
     "typescript": true,
@@ -43,9 +43,7 @@
     "@tarojs/helper": "3.5.3",
     "@tarojs/plugin-framework-vue3": "3.5.3",
     "@tarojs/plugin-html": "3.5.3",
-    "@tarojs/plugin-http": "^3.6.32",
     "@tarojs/plugin-platform-alipay": "3.5.3",
-    "@tarojs/plugin-platform-h5": "^3.6.32",
     "@tarojs/plugin-platform-jd": "3.5.3",
     "@tarojs/plugin-platform-qq": "3.5.3",
     "@tarojs/plugin-platform-swan": "3.5.3",
@@ -56,16 +54,15 @@
     "@tarojs/shared": "3.5.3",
     "@tarojs/taro": "3.5.3",
     "@tarojs/taro-h5": "3.5.3",
-    "axios": "^1.7.2",
-    "querystring": "^0.2.1",
-    "vue": "^3.0.0",
-    "wx-server-sdk": "^3.0.1"
+    "@types/lodash-es": "^4.17.12",
+    "lodash": "^4.17.21",
+    "vue": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
-    "@nutui/auto-import-resolver": "^1.0.0",
     "@tarojs/cli": "3.5.3",
-    "@tarojs/webpack5-runner": "3.5.3",
+    "@tarojs/mini-runner": "3.5.3",
+    "@tarojs/webpack-runner": "3.5.3",
     "@types/webpack-env": "^1.13.6",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
@@ -81,6 +78,6 @@
     "typescript": "^3.7.0",
     "unplugin-vue-components": "^0.22.12",
     "vue-loader": "^17.0.0",
-    "webpack": "5.69.0"
+    "webpack": "4.46.0"
   }
 }

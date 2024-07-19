@@ -2,11 +2,11 @@
   <view class="recommand-wrapper">
     <view class="head-title" :class="{ center: direction === 'col' }">
       <view>{{themeTitle}}</view>
-      <view class="more" v-if="direction === 'row'">更多</view>
+<!--      <view class="more" v-if="direction === 'row'">更多</view>-->
     </view>
     <view class="recommand-wrapper--content">
-      <RecommandRow v-if="direction === 'row'" @item-click="handleClick"></RecommandRow>
-      <RecommandCol v-else @item-click="handleClick"></RecommandCol>
+      <RecommandRow v-if="direction === 'row'" @item-click="handleClick" :data="list"></RecommandRow>
+      <RecommandCol v-else @item-click="handleClick" :data="list"></RecommandCol>
     </view>
   </view>
 </template>
@@ -18,7 +18,8 @@ defineProps({
   direction: {
     type: String,
     default: 'row'
-  }
+  },
+  list: {}
 })
 const emits = defineEmits(['item-click'])
 const handleClick = (item) => {

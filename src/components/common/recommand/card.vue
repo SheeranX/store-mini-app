@@ -1,24 +1,33 @@
 <template>
   <view class="good-item">
-    <image src="https://m.360buyimg.com/n2/jfs/t1/183517/38/7834/227702/60be1915Ed04664b0/eaf7536ab2c5f4b0.jpg" class="good-item--img"/>
+    <image :src="host + img" class="good-item--img" mode="aspectFit"/>
     <view class="good-item--brand">
-      <view class="good-item--brand__text">大行</view>
-      <nut-tag type="danger" size="small">新品</nut-tag>
+      <view class="good-item--brand__text">{{info.brandName}}</view>
+<!--      <nut-tag type="danger" size="small">新品</nut-tag>-->
     </view>
     <view class="good-item--title">
-      <view>这是一个商品</view>
+      <view>{{info.title}}</view>
     </view>
     <view class="good-item--price">
-      <nut-price :price="199" size="normal" />
-      <nut-price :price="8888" :decimal-digits="0" strike-through size="small"/>
+      <nut-price :price="info.price" size="normal" />
+      <nut-price :price="originPrice" :decimal-digits="0" strike-through size="small"/>
     </view>
   </view>
 </template>
 <script setup>
-defineProps({
+import {computed} from "vue";
+import {host} from "@/utils/request";
+
+const props = defineProps({
   info: {
     type: Object,
     default: () => ({})
   }
+})
+const img = computed(() => {
+  return props.info.imgUrls.split(',')?.[0]
+})
+const originPrice = computed(() => {
+  return props.info.price * 1.2
 })
 </script>

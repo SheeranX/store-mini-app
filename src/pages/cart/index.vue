@@ -1,18 +1,24 @@
 <template>
   <Navbar name="购物车" align="center"></Navbar>
   <view class="cart-wrapper">
-    <div class="cart-wrapper--pay" v-if="list.length">
-      <nut-checkbox v-model="checkAll">全选</nut-checkbox>
+    <div class="cart-wrapper--pay" v-if="cartList.length">
+      <nut-checkbox v-model="checkAll" @change="handleChange">全选</nut-checkbox>
       <div class="cart-wrapper--pay--right">
-        <span class="cart-wrapper--pay--right__total">总计: <span class="cart-wrapper--pay--right__total--num">111</span></span>
-        <nut-button type="primary">结算: 共5件</nut-button>
+        <span class="cart-wrapper--pay--right__total">总计: <span class="cart-wrapper--pay--right__total--num">{{total}}</span></span>
+        <nut-button type="primary">结算: 共{{totalItems}}件</nut-button>
       </div>
     </div>
-    <template v-if="list.length">
-      <cart-item v-for="(item, index) in list" :key="index" class="cart-wrapper-item" @sku-click="handleSkuClick"></cart-item>
+    <template v-if="cartList.length">
+      <cart-item
+          v-for="(item, index) in cartList"
+          :key="index"
+          class="cart-wrapper-item"
+          @item-delete="handleDelete"
+          @sku-click="handleSkuClick"
+          v-model:info="cartList[index]"></cart-item>
     </template>
     <nut-empty description="购物车空空如也，快去选购吧～" v-else></nut-empty>
-    <Recommand theme-title="猜你喜欢" direction="col" v-if="!list.length"></Recommand>
+    <Recommand theme-title="猜你喜欢" direction="col" v-if="!cartList.length"></Recommand>
     <nut-sku
         v-model:visible="skuVisible"
         :sku="data.sku"
@@ -25,11 +31,12 @@
 </template>
 
 <script>
-import {computed, onMounted, reactive, ref, toRefs} from 'vue';
+import {computed, onMounted, reactive, ref, toRefs, watch} from 'vue';
 import CartItem from './widgets/cart-item.vue'
 import DATA from "@/pages/cart/widgets/3x_data";
 import Recommand from '@/components/common/recommand/recommand-container.vue'
 import { useCart } from "@/hook/add-cart";
+
 export default {
   name: 'cart',
   components: {
@@ -37,10 +44,8 @@ export default {
     CartItem
   },
   setup() {
-    const { cartList } = useCart()
-    const list = computed(() => {
-      return cartList.value
-    })
+    const { cartList, remove } = useCart()
+    const list = ref([])
     const checkAll = ref(false)
     const skuVisible = ref(false)
     const data = ref({
@@ -60,6 +65,12 @@ export default {
         imagePath: '//img14.360buyimg.com/n4/jfs/t1/215845/12/3788/221990/618a5c4dEc71cb4c7/7bd6eb8d17830991.jpg'
       }
     }
+    const handleChange = (val) => {
+      cartList.value = cartList.value.map(item => ({
+        ...item,
+        checked: val
+      }))
+    }
     const clickBtnOperate = (params) => {
       skuVisible.value = false
     }
@@ -68,12 +79,36 @@ export default {
       data.value.sku = Sku
       data.value.goods = Goods
     })
+    watch(() => cartList.value, (val) => {
+      console.log(val, 'val')
+    }, {
+      deep: true
+    })
     const handleClick = (type, msg, cover = false) => {
       // todo
-    };
-    const handleSkuClick = () => {
-      skuVisible.value = true
     }
+    const handleDelete = (item) => {
+      remove(item.id)
+    }
+    const handleSkuClick = () => {
+      // skuVisible.value = true
+    }
+    const total = computed(() => {
+      return cartList.value.reduce((total, cur)=> {
+        if(cur.checked) {
+          total += Number(cur.number) * cur.price
+        }
+        return total
+      }, 0)
+    })
+    const totalItems = computed(() => {
+      return cartList.value.reduce((total, cur)=> {
+        if(cur.checked) {
+          total += Number(cur.number)
+        }
+        return total
+      }, 0)
+    })
     return {
       handleClick,
       skuVisible,
@@ -83,7 +118,11 @@ export default {
       clickBtnOperate,
       handleSkuClick,
       checkAll,
-      list
+      cartList,
+      handleChange,
+      handleDelete,
+      total,
+      totalItems
     }
   }
 }
